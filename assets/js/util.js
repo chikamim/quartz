@@ -54,20 +54,25 @@ const removeMarkdown = (
 }
 
 const highlight = (content, term) => {
-  const highlightWindow = 20
+  const highlightWindow = 80
   // try to find direct match first
   const directMatchIdx = content.indexOf(term)
   if (directMatchIdx !== -1) {
     const h = highlightWindow
-    const before = content.substring(0, directMatchIdx).split(" ").slice(-h)
+    // const before = content.substring(0, directMatchIdx).split(" ").slice(-h)
+    // const after = content
+    //   .substring(directMatchIdx + term.length, content.length - 2)
+    //   .split(" ")
+    //   .slice(0, h)
+    const before = content.substring(0, directMatchIdx).split("").slice(-h)
     const after = content
       .substring(directMatchIdx + term.length, content.length - 2)
-      .split(" ")
+      .split("")
       .slice(0, h)
     return (
-      (before.length == h ? `...${before.join(" ")}` : before.join(" ")) +
+      (before.length == h ? `...${before.join("")}` : before.join("")) +
       `<span class="search-highlight">${term}</span>` +
-      after.join(" ")
+      after.join("")
     )
   }
 
@@ -101,6 +106,7 @@ const highlight = (content, term) => {
       return token
     })
     .join(" ")
+    .substring(0, highlightWindow * 2) //　limit to window
     .replaceAll('</span> <span class="search-highlight">', " ")
   return `${startIndex === 0 ? "" : "..."}${mappedText}${endIndex === splitText.length ? "" : "..."
     }`
@@ -148,8 +154,8 @@ const registerHandlers = (onInputFn) => {
   const source = document.getElementById("search-bar")
   const searchContainer = document.getElementById("search-container")
   let term
-  source.addEventListener("keyup", (e) => {
-    if (e.key === "Enter") {
+  source.addEventListener("keydown", (e) => {
+    if (e.keyCode === 13) { // IME入力のEnterは受け付けない
       const anchor = document.getElementsByClassName("result-card")[0]
       redir(anchor.id, term)
     }

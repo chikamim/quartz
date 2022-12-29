@@ -17,7 +17,7 @@ other = "notes with this tag"
 other = "showing first 10 results"
 
 [tag]
-other = "Tag"
+other = "tag"
 
 [backlinks]
 other = "Backlinks"
@@ -62,4 +62,4 @@ other = "Search for something..."
 other = "Table of Contents"
 
 [copyright]
-other = "Made by {{ .name }} using <a href=\"https://github.com/jackyzha0/quartz\">Quartz</a>, © {{ .year }}"
+other = "©️{{ .name }} using <a href=\"https://github.com/jackyzha0/quartz\">Quartz</a>, {{ .year }}"

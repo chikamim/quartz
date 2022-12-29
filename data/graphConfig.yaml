@@ -8,9 +8,9 @@ enableGlobalGraph: false
 localGraph:
     enableLegend: false
     enableDrag: true
-    enableZoom: true
+    enableZoom: false
     depth: 1 # set to -1 to show full graph
-    scale: 1.2
+    scale: 1.5
     repelForce: 2
     centerForce: 1
     linkDistance: 1
